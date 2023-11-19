@@ -1,10 +1,38 @@
-export const Home = () => {
-  const key = '493ca07ced65ee69b94ce62a3e3db755';
-  const url = 'https://api.themoviedb.org';
+import { useState, useEffect } from 'react';
 
-  fetch(url);
+export const Home = () => {
+  const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
+  const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
+  const [films, setFilms] = useState([]);
+
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //       accept: 'application/json',
+  //     },
+  //   };
+
+  useEffect(() => {
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(response => {
+        setFilms(response.results[0]);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  console.log(films);
 
   // strona domowa z list popularnych filmow
 
-  return <h1>Trending Today</h1>;
+  return (
+    <div>
+      <h1>Trending Today</h1>
+      <ul>
+        {films.map(film => {
+          <li key={film.id}>{film.title}</li>;
+        })}
+      </ul>
+    </div>
+  );
 };
