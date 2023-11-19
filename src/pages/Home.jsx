@@ -19,7 +19,7 @@ export const Home = () => {
         setFilms(response.results[0]);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [apiUrl]);
 
   console.log(films);
 
@@ -29,9 +29,7 @@ export const Home = () => {
     <div>
       <h1>Trending Today</h1>
       <ul>
-        {films.map(film => {
-          <li key={film.id}>{film.title}</li>;
-        })}
+        <li key={films.key}>{films.results}</li>
       </ul>
     </div>
   );
