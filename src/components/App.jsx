@@ -1,48 +1,24 @@
 import { Link, Routes, Route } from 'react-router-dom';
-import { Home } from '../pages/Home';
-import { useState, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
+
+const Home = lazy(() => import('../pages/Home'));
+const Movies = lazy(() => import('pages/Movies'));
+const MovieDetails = lazy(() => import('pages/MovieDetails'));
 
 export const App = () => {
-  const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
-  const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
-  const [films, setFilms] = useState([]);
-
-  //   const options = {
-  //     method: 'GET',
-  //     headers: {
-  //       accept: 'application/json',
-  //     },
-  //   };
-
-  useEffect(() => {
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(response => {
-        const filteredFilms = response.results.filter(
-          (film, index) => index !== 20
-        );
-        setFilms(filteredFilms);
-        console.log(filteredFilms);
-      })
-      .catch(err => console.error(err));
-  }, [apiUrl]);
-
   return (
     <>
       <div>
         <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/movies" exact element={<Movies />} />
+            <Route path="/movies/:movieId" exact element={<MovieDetails />} />
+          </Suspense>
         </Routes>
-
-        <ul>
-          {films.map(film => (
-            <li key={film.id}>
-              <Link to="/movies">{film.title}</Link>
-            </li>
-          ))}
-        </ul>
       </div>
     </>
   );

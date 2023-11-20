@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-export const Home = () => {
-  // const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
-  // const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
-  // const [films, setFilms] = useState([]);
+const Home = () => {
+  const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
+  const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
+  const [films, setFilms] = useState([]);
 
   // //   const options = {
   // //     method: 'GET',
@@ -12,28 +13,32 @@ export const Home = () => {
   // //     },
   // //   };
 
-  // useEffect(() => {
-  //   fetch(apiUrl)
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       const filteredFilms = response.results.filter(
-  //         (film, index) => index !== 20
-  //       );
-  //       setFilms(filteredFilms);
-  //     })
-  //     .catch(err => console.error(err));
-  // }, [apiUrl]);
+  useEffect(() => {
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(response => {
+        const filteredFilms = response.results.filter(
+          (film, index) => index !== 20
+        );
+        setFilms(filteredFilms);
+      })
+      .catch(err => console.error(err));
+  }, [apiUrl]);
 
   // strona domowa z list popularnych filmow
 
   return (
     <div>
       <h1>Trending Today</h1>
-      {/* <ul>
-        {films.map(film => (
-          <li key={film.id}>{film.title}</li>
+      <ul>
+        {films.map(movie => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };
+
+export default Home;
