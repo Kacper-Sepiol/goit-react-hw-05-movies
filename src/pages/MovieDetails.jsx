@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, Routes, Route } from 'react-router-dom';
+import { useParams, Link, Routes, Route, Outlet } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 const Cast = lazy(() => import('./Cast'));
@@ -21,29 +21,28 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <h2>{movieDetails.title}</h2>
-      <nav>
-        <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-        <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-      </nav>
-      <Routes>
-        <Route
-          path="/movies/:movieId/cast"
-          element={
-            <Suspense fallback={<h1>Loading...</h1>}>
-              <Cast movieId={movieId} />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/movies/:movieId/reviews"
-          element={
-            <Suspense fallback={<h1>Loading...</h1>}>
-              <Reviews movieId={movieId} />
-            </Suspense>
-          }
-        />
-      </Routes>
+      <header>
+        <h1>{movieDetails.title}</h1>
+        <h3>Overview:</h3>
+        <h4>{movieDetails.overview}</h4>
+        <h3>run time:</h3>
+        <h4>{movieDetails.runtime}</h4>
+        <p>Additional information</p>
+        <nav>
+          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+          <br />
+          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+        </nav>
+      </header>
+
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Routes>
+          <Route path={`/${movieId}/cast`} element={<Cast />} />
+          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
+
+      <Outlet />
     </div>
   );
 };

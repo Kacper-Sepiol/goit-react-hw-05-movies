@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Reviews = ({ movieId }) => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const { movieId } = useParams();
 
   useEffect(() => {
     const apiKey = '493ca07ced65ee69b94ce62a3e3db755';

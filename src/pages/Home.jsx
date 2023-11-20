@@ -6,13 +6,6 @@ const Home = () => {
   const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
   const [films, setFilms] = useState([]);
 
-  // //   const options = {
-  // //     method: 'GET',
-  // //     headers: {
-  // //       accept: 'application/json',
-  // //     },
-  // //   };
-
   useEffect(() => {
     fetch(apiUrl)
       .then(response => response.json())
