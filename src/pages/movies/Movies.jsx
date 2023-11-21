@@ -6,7 +6,7 @@ const Movies = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = () => {
-    const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
+    const apiKey = process.env.REACT_APP_API_KEY;
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`;
 
     fetch(url)

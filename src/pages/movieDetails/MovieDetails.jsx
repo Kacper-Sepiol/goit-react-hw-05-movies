@@ -19,7 +19,7 @@ const MovieDetails = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
+    const apiKey = process.env.REACT_APP_API_KEY;
 
     // zapytanie o film
     fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`)

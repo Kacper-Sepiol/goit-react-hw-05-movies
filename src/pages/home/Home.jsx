@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
+  const apiKey = process.env.REACT_APP_API_KEY;
   const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
   const [films, setFilms] = useState([]);
 
