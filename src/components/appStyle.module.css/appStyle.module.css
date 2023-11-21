@@ -1,0 +1,14 @@
+.linkApp {
+  font-size: 30px;
+  color: black;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.linkApp:hover {
+  color: yellowgreen;
+}
+
+.linkApp:not(:last-child) {
+  margin-right: 30px;
+}

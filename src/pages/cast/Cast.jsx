@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
+import css from './cast.module.css';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
-
-    if (movieId) {
-      console.log('movieId nie jest zjebany');
-    }
 
     fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
@@ -24,6 +22,10 @@ const Cast = () => {
 
   return (
     <div>
+      <Link to={location.state.from} className={css.backButton}>
+        Back
+      </Link>
+
       <h2>Cast</h2>
       <ul>
         {cast.map(actor => (

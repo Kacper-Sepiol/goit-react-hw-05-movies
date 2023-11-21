@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, Routes, Route, Outlet } from 'react-router-dom';
+import {
+  useParams,
+  Link,
+  Routes,
+  Route,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import css from './movieDetails.module.css';
 
-const Cast = lazy(() => import('./Cast'));
-const Reviews = lazy(() => import('./Reviews'));
+const Cast = lazy(() => import('../cast/Cast'));
+const Reviews = lazy(() => import('../reviews/Reviews'));
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
+  const location = useLocation();
 
   useEffect(() => {
     const apiKey = '493ca07ced65ee69b94ce62a3e3db755';
@@ -29,9 +38,21 @@ const MovieDetails = () => {
         <h4>{movieDetails.runtime}</h4>
         <p>Additional information</p>
         <nav>
-          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+          <Link
+            to={`/movies/${movieId}/cast`}
+            state={{ from: location }}
+            className={css.linkMovieDetails}
+          >
+            Cast
+          </Link>
           <br />
-          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          <Link
+            to={`/movies/${movieId}/reviews`}
+            state={{ from: location }}
+            className={css.linkMovieDetails}
+          >
+            Reviews
+          </Link>
         </nav>
       </header>
 

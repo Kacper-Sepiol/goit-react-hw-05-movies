@@ -10,9 +10,9 @@ const Home = () => {
     fetch(apiUrl)
       .then(response => response.json())
       .then(response => {
-        const filteredFilms = response.results.filter(
-          (film, index) => index !== 20
-        );
+        const filteredFilms = response.results
+          .filter((film, index) => index !== 20)
+          .filter(film => film.title);
         setFilms(filteredFilms);
       })
       .catch(err => console.error(err));
