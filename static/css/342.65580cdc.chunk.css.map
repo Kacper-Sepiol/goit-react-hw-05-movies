@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/342.65580cdc.chunk.css","mappings":"AAAA,sCACE,UAAY,CAEZ,cAAe,CADf,oBAEF,CAEA,4CACE,aACF","sources":["pages/movieDetails/movieDetails.module.css"],"sourcesContent":[".linkMovieDetails {\n  color: black;\n  text-decoration: none;\n  font-size: 20px;\n}\n\n.linkMovieDetails:hover {\n  color: blueviolet;\n}\n"],"names":[],"sourceRoot":""}
