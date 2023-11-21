@@ -31,6 +31,9 @@ const MovieDetails = () => {
   return (
     <div>
       <header>
+        <Link to={location.state.from} className={css.backButton}>
+          Back
+        </Link>
         <h1>{movieDetails.title}</h1>
         <h3>Overview:</h3>
         <h4>{movieDetails.overview}</h4>

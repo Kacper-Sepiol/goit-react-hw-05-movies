@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import css from './homeStyle.module.css';
 
 const Home = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const apiUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${apiKey}`;
   const [films, setFilms] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     fetch(apiUrl)
@@ -25,8 +27,14 @@ const Home = () => {
       <h1>Trending Today</h1>
       <ul>
         {films.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          <li key={movie.id} className={css.listItem}>
+            <Link
+              to={`/movies/${movie.id}`}
+              className={css.linkListItem}
+              state={{ from: location }}
+            >
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>
